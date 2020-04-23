@@ -1,9 +1,17 @@
 package main
 
-import "./controllers"
+import (
+	"os"
+
+	"./controllers"
+)
 
 func main() {
-	server := NewServer(":8000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":8000"
+	}
+	server := NewServer(":" + port)
 	server.handle("/confessions", "GET", controllers.IndexConfession)
 	server.handle("/confessions", "POST", controllers.StoreConfession)
 	server.listen()
