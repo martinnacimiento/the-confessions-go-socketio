@@ -20,7 +20,8 @@ type Server struct {
 }
 
 func (s *Server) listen() error {
-	http.Handle("/", s.router) // No entiendo porque en main hacemos al similar
+	http.Handle("/", s.router) // Agrega todas las rutas
+	//NewWebsocket()
 	err := http.ListenAndServe(s.port, nil)
 	if err != nil {
 		log.Fatal("unable to run server", err)
